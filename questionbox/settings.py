@@ -43,13 +43,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
 
     # Third-party
     'debug_toolbar',
     'django_extensions',
+    
 
     # Project-specific
     'users',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +143,4 @@ INTERNAL_IPS = [
 ]
 import django_heroku
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
