@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block meta %}{% endblock %}
+    <title>{% block title %}Questionbox% endblock %}</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+</head>
+<body class= "bg-moon-gray">
+    <div>
+        <nav class="pa3 pa3-ns mt2 mr6 ml6 bg-light-silver outline shadow-2">
+            <a class="link dim dark-blue b f1 1h-title-ns tc db mb3 mb1-ns" href="{% url 'homepage' %}" title="Home">QuestionboX</a>
+            {% if user.is_authenticated %}
+            <div class="tc pb3">
+              <a class="link dim dark-blue f6 f4-ns dib mr3 ml3" href="{% url 'homepage' %}" title="Home">Home</a>
+              <a class="link dim dark-blue f6 f4-ns dib mr3 ml3" href="{% url 'auth_logout' %}" title="Logout">Log Out</a>
+            </div>
+            {% endif %}
+          </nav>
+          {% block content %}
+          {% endblock %}
+    </div>
+
+
+</body>
+</html>

@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
+from core import views as core_views
 
 urlpatterns = [
+    path('', core_views.homepage, name = "homepage"),
+    path('questionbox/', core_views.my_questionbox, name ="my_questionbox"),
     path('admin/', admin.site.urls),
+    path('accounts/', include('registration.backends.simple.urls')),
 ]
 
 if settings.DEBUG:
