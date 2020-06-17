@@ -4,4 +4,15 @@
     <div>
         <h2 class="tc dark-blue"> My QuestionBox</h2>
     </div>
+
+    <div class="w-50-m ml6 mr3 bg-light-gray pa1 outline shadow-2">
+        <h3 class="tc dark-blue">My Questions:</h3>
+        <ul>
+            {% for question in questions %}
+                <li class="mr4"><a href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <p class="tc dark-blue"><a href="{% url 'create_question' %}">Ask a Question</a></p>
 {% endblock %}

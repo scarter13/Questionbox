@@ -13,7 +13,7 @@
             <a class="link dim dark-blue b f1 1h-title-ns tc db mb3 mb1-ns" href="{% url 'homepage' %}" title="Home">QuestionboX</a>
             {% if user.is_authenticated %}
             <div class="tc pb3">
-              <a class="link dim dark-blue f6 f4-ns dib mr3 ml3" href="{% url 'homepage' %}" title="Home">Home</a>
+              <a class="link dim dark-blue f6 f4-ns dib mr3 ml3" href="{% url 'my_qbox' %}" title="Home">Home</a>
               <a class="link dim dark-blue f6 f4-ns dib mr3 ml3" href="{% url 'auth_logout' %}" title="Logout">Log Out</a>
             </div>
             {% endif %}

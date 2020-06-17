@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="ml6 dark-blue">Ask a question</h2>
+
+<form class="ml6 pa2 w-100 dark-blue" action="{% url 'create_question' %}" method = "POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+        <button class="f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray dark-blue shadow-2"type="submit">Post your question</button>
+    </div>
+</form>
+
+
+
+{% endblock %}

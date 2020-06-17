@@ -5,9 +5,14 @@ from users.models import User
 # Create your models here.
 class Question(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=True, related_name='questions')
-    headline = models.CharField(max_length=255)
-    text = models.TextField()
+    title = models.CharField(max_length=255)
+    body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    #tags
+
+
+    #def __str__(self):
+    #return self.title
 
 
 class Answer(models.Model):
@@ -15,8 +20,16 @@ class Answer(models.Model):
     question = models.ForeignKey(to = Question, on_delete = models.CASCADE, related_name='answers')
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    correct = models.BooleanField(blank=True, null=True)
 
 class StarQuestion(models.Model):
-    user = models.ForeignKey(to=Question, on_delete=models.CASCADE, related_name='star_questions')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='star_questions')
+    question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+    star = models.BooleanField(blank=True, null=True)
+
+class StarAnswer(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='star_answers')
+    question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+    star = models.BooleanField(blank=True, null=True)
     
 

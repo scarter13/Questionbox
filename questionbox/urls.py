@@ -21,6 +21,7 @@ from core import views as core_views
 urlpatterns = [
     path('', core_views.homepage, name = 'homepage'),
     path('qbox/', core_views.my_qbox, name = 'my_qbox'),
+    path('qbox/ask/', core_views.create_question, name = 'create_question'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
 ]
