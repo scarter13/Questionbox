@@ -11,11 +11,9 @@ def homepage(request):
     if request.user.is_authenticated:
         return redirect (to='my_questionbox')
 
-    return render(request, "questionbox/home.html")
+    return render(request, "qbox/home.html")
 
-"""
-Regarding the homepage view above: once you select the view to which you will redirect, you can bump the following line out to be in line with the if statement
-"""
+
 
 def my_questionbox(request):
     questions = request.user.questions.all()
