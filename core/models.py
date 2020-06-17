@@ -24,12 +24,12 @@ class Answer(models.Model):
 
 class StarQuestion(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='star_questions')
-    question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(to=Question, on_delete=models.CASCADE, null=True)
     star = models.BooleanField(blank=True, null=True)
 
 class StarAnswer(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='star_answers')
-    question = models.ForeignKey(to=Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(to=Question, on_delete=models.CASCADE, null=True)
     star = models.BooleanField(blank=True, null=True)
     
 
