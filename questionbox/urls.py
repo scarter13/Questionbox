@@ -20,7 +20,7 @@ from core import views as core_views
 
 urlpatterns = [
     path('', core_views.homepage, name = 'homepage'),
-    path('questionbox/', core_views.my_questionbox, name = 'my_questionbox'),
+    path('qbox/', core_views.my_qbox, name = 'my_qbox'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
 ]

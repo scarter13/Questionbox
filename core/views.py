@@ -9,13 +9,13 @@ Import other models as needed from .models and .forms or they won't work!
 # Create your views here.
 def homepage(request):
     if request.user.is_authenticated:
-        return redirect (to='my_questionbox')
+        return redirect (to='my_qbox')
 
     return render(request, "qbox/home.html")
 
 
 
-def my_questionbox(request):
+def my_qbox(request):
     questions = request.user.questions.all()
     #answers = request.user.answers.all
     return render(request, "questionbox/my_questionbox.html", {"questions": questions})
