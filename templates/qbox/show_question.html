@@ -9,21 +9,21 @@
 
 
 
-<div class="w-50-m ml6 mr6 mb3 mt4 bg-light-gray pa1 outline shadow-2">
-    <h2 class="dark-blue mb1">{{ question.title }}</h2>
+<div class="w-50-m ml6 mr6 mb3 mt4 bg-washed-yellow pa1 outline shadow-2">
+    <h2 class="black mb1">{{ question.title }}</h2>
     <p class="mt1">{{ question.date }}</p>
     <p> {{ question.body }} </p>
     {% if request_user == question.user %}
-            <p class="f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray dark-blue shadow-2">Edit Question</p>
+            <p class="f6 link dim br3 ph3 pv2 mb2 dib white bg-dark-green">Edit Question</p>
     {% else %}
-        <p class="ml6 dark-blue">
-            <a class="f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray dark-blue shadow-2" href="{% url 'create_answer' question_pk=question.pk %}">Answer Question</a>
+        <p class="ml6 black">
+            <a class="f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray black shadow-2" href="{% url 'create_answer' question_pk=question.pk %}">Answer Question</a>
         </p>
     {% endif %}
 </div>
     {% if answers %}
         {% for answer in answers %}
-        <div class="w-50-m ml6 mr6 mb3 bg-light-gray pa2 outline shadow-2">
+        <div class="w-50-m ml6 mr6 mb3 bg-light-yellow pa2 outline shadow-2">
             <p>Answer from {{ answer.author }} submitted on {{ answer.date }}:</p>
             <p>{{ answer.text }}</p>
         </div>

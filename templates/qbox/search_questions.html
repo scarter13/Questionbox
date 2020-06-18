@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1 class="dark-blue ml6">Search Questions</h1>
+<h1 class="black ml6">Search Questions</h1>
 
 <form class="ml6 mr6" action="{% url 'search_questions' %}" method="GET">
     <input type="search" name="q" placeholder="search questions" class="pa2 w-100" value="{{ request.GET.q }}">
@@ -13,11 +13,11 @@
 
 {% if found_questions is not None %}
 
-        <div class="w-50-m ml6 mr6 mb3 bg-light-gray pa1 outline shadow-2">
-            <h3 class="dark-blue mt1 mb1">Search Results</h3>
+        <div class="w-50-m ml6 mr6 mb3 bg-washed-yellow pa1 outline shadow-2">
+            <h3 class="black mt1 mb1">Search Results</h3>
         </div>
                 {% for question in found_questions %}
-                <div class="w-50-m ml6 mr6 mb3 bg-light-gray pa2 outline shadow-2">
+                <div class="w-50-m ml6 mr6 mb3 bg-washed-yellow pa2 outline shadow-2">
                     <a href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a>
                     <p class="mt1 mb1">Question from {{ question.user }}</p>
                     <p class="mt1 mb1">{{ question.date }}</p>
