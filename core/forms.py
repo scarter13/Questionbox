@@ -16,3 +16,10 @@ class QuestionForm(forms.ModelForm):
             'title',
             'body',
         ]
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = [
+            'text',
+        ]

@@ -21,5 +21,14 @@
         </p>
     {% endif %}
 </div>
+    {% if answers %}
+        {% for answer in answers %}
+        <div class="w-50-m ml6 mr6 mb3 bg-light-gray pa2 outline shadow-2">
+            <p>Answer from {{ answer.author }} submitted on {{ answer.date }}:</p>
+            <p>{{ answer.text }}</p>
+        </div>
+        {% endfor %}
+    {% endif %}
+
 
 {% endblock %}

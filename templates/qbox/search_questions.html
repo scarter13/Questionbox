@@ -21,9 +21,11 @@
                     <a href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a>
                     <p class="mt1 mb1">Question from {{ question.user }}</p>
                     <p class="mt1 mb1">{{ question.date }}</p>
+                </div>
                 {% empty %}
                     <p class="mr4">There are no questions that match that query</p>
                 {% endfor %}
+
 
 
 {% endif %}

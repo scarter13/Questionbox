@@ -3,13 +3,12 @@ from django.contrib.auth.decorators import login_required
 from users.models import User
 #from .models import Tag
 from .models import Question
+from .models import Answer
 from .forms import QuestionForm 
+from .forms import AnswerForm
 from django.db.models import Q
 
 
-"""
-Import other models as needed from .models and .forms or they won't work!
-"""
 # Create your views here.
 def homepage(request):
     if request.user.is_authenticated:
@@ -39,8 +38,9 @@ def create_question(request):
 def show_question(request, question_pk):
     question = get_object_or_404(Question, pk=question_pk)
     request_user = request.user
+    answers = question.answers.all()
 
-    return render(request, "qbox/show_question.html", {"question": question, "request_user": request_user})  
+    return render(request, "qbox/show_question.html", {"question": question, "request_user": request_user, "answers": answers})  
 
 def create_answer(request, question_pk):
     question = get_object_or_404(Question, pk=question_pk)
