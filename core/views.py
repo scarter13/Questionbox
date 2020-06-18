@@ -35,3 +35,12 @@ def create_question(request):
         form = QuestionForm()
 
     return render(request, "qbox/create_question.html", {"form": form})
+
+def show_question(request, question_pk):
+    question = get_object_or_404(Question, pk=question_pk)
+    request_user = request.user
+
+    return render(request, "qbox/show_question.html", {"question": question, "request_user": request_user})  
+
+def create_answer(request, question_pk):
+    pass

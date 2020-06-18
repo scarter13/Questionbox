@@ -22,6 +22,8 @@ urlpatterns = [
     path('', core_views.homepage, name = 'homepage'),
     path('qbox/', core_views.my_qbox, name = 'my_qbox'),
     path('qbox/ask/', core_views.create_question, name = 'create_question'),
+    path('qbox/question/<int:question_pk>/', core_views.show_question, name = 'show_question'),
+    path('qbox/new/answer/<int:question_pk>/', core_views.create_answer, name = 'create_answer'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
 ]

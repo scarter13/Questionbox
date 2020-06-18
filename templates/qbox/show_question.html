@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ question.title }}
+{% endblock %}
+
+{% block content %}
+
+
+
+
+<div class="w-50-m ml6 mr6 mb3 mt4 bg-light-gray pa1 outline shadow-2">
+    <h2 class="dark-blue">{{ question.title }}</h2>
+    <p> {{ question.body }} </p>
+    {% if request_user == question.user %}
+            <p class="f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray dark-blue shadow-2">Edit Question</p>
+    {% else %}
+        <p class="ml6 dark-blue">
+            <a class="f5 link dim ba bw2 ph3 pv2 mb2 dib bg-light-gray dark-blue shadow-2" href="{% url 'create_answer' pk=question.pk %}">Answer Question</a>
+        </p>
+    {% endif %}
+</div>
+
+{% endblock %}
