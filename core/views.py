@@ -43,4 +43,25 @@ def show_question(request, question_pk):
     return render(request, "qbox/show_question.html", {"question": question, "request_user": request_user})  
 
 def create_answer(request, question_pk):
-    pass
+    question = get_object_or_404(Question, pk=question_pk)
+    if request.method == "POST":
+        form = AnswerForm(data=request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.author = request.user
+            answer.question = question
+            answer.save()
+            #question.set_tag_names(form.cleaned_data['tag_names'])
+            return redirect(to='show_question', question_pk=question.pk)
+    else:
+        form = AnswerForm()
+
+    return render(request, "qbox/create_answer.html", {"form": form, "question": question})
+
+def search_questions(request):
+    query = request.GET.get('q')
+    if query is not None:
+        found_questions = Question.objects.filter(Q(title__icontains=query) | Q(body__icontains=query)).distinct()
+    else:
+        found_questions = None
+    return render(request, "qbox/search_questions.html", {"found_questions": found_questions, "query": query})

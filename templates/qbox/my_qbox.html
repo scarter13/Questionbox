@@ -12,7 +12,7 @@
     </div>
             {% for question in questions %}
                 <div class="w-50-m ml6 mr6 mb3 bg-light-gray pa1 outline shadow-2">
-                    <a class="darkblue f4" href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a>
+                    <a class="darkblue f4" href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a><p class="mt1">{{ question.date }}</p>
                     <p>{{ question.body }}</p>
                 </div>
             {% endfor %}

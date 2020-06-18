@@ -20,7 +20,7 @@ class Answer(models.Model):
     question = models.ForeignKey(to = Question, on_delete = models.CASCADE, related_name='answers')
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
-    correct = models.BooleanField(blank=True, null=True)
+    #correct = models.BooleanField(blank=True, null=True)
 
 class StarQuestion(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='star_questions')
