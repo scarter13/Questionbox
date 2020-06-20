@@ -11,12 +11,16 @@
     <div>
         <nav class="pa3 pa3-ns mt2 mr6 ml6 bg-washed-yellow outline shadow-2">
             <a class="link dim black b f1 1h-title-ns tc db mb3 mb1-ns" href="{% url 'homepage' %}" title="Home">QuestionboX</a>
-            {% if user.is_authenticated %}
+
             <div class="tc pb3">
+              <a class="link dim black f6 f4-ns dib mr3 ml3" href="{% url 'search_questions' %}" title="Search">Search</a>    
+              {% if user.is_authenticated %}
               <a class="link dim black f6 f4-ns dib mr3 ml3" href="{% url 'my_qbox' %}" title="Home">Home</a>
-              <a class="link dim black f6 f4-ns dib mr3 ml3" href="{% url 'search_questions' %}" title="Search">Search</a>              
               <a class="link dim black f6 f4-ns dib mr3 ml3" href="{% url 'auth_logout' %}" title="Logout">Log Out</a>
               <p class="tc mb0 black">Currently logged in as {{ user.username }}</p>
+              {% else %}
+              <a class="link dim black f6 f4-ns dib mr3 ml3" href="{% url 'auth_login' %}"" title="Login">Log In</a>
+              <a class="link dim black f6 f4-ns dib mr3 ml3" href="{% url 'registration_register' %}" title="CreateAccount">Sign Up</a>
             </div>
             {% endif %}
           </nav>

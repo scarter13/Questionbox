@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1 class="black ml6">Search Questions</h1>
+<h2 class="black ml6">Search Questions</h2>
 
 <form class="ml6 mr6" action="{% url 'search_questions' %}" method="GET">
     <input type="search" name="q" placeholder="search questions" class="pa2 w-100" value="{{ request.GET.q }}">

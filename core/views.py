@@ -42,6 +42,20 @@ def show_question(request, question_pk):
 
     return render(request, "qbox/show_question.html", {"question": question, "request_user": request_user, "answers": answers})  
 
+def edit_question(request, question_pk):
+    question = get_object_or_404(request.user.questions, pk=question_pk)
+
+    if request.method == 'POST':
+        form = QuestionForm(data=request.POST, instance=question)
+        if form.is_valid():
+            question = form.save()
+            return redirect(to='show_question', question_pk=question.pk)
+    else:
+        form = QuestionForm(instance=question)
+
+
+    return render (request, "qbox/edit_question.html", {"form": form, "question": question})
+
 def create_answer(request, question_pk):
     question = get_object_or_404(Question, pk=question_pk)
     if request.method == "POST":

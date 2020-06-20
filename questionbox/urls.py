@@ -19,10 +19,11 @@ from django.urls import include, path
 from core import views as core_views
 
 urlpatterns = [
-    path('', core_views.homepage, name = 'homepage'),
+    path('', core_views.search_questions, name = 'homepage'),
     path('qbox/', core_views.my_qbox, name = 'my_qbox'),
     path('qbox/ask/', core_views.create_question, name = 'create_question'),
     path('qbox/question/<int:question_pk>/', core_views.show_question, name = 'show_question'),
+    path('qbox/edit/question/<int:question_pk>/', core_views.edit_question, name='edit_question'),
     path('qbox/new/answer/<int:question_pk>/', core_views.create_answer, name = 'create_answer'),
     path('qbox/search/', core_views.search_questions, name = 'search_questions'),
     path('admin/', admin.site.urls),
