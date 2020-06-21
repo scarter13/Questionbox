@@ -24,6 +24,9 @@ def my_qbox(request):
     questions = request.user.questions.all()
     questions = questions.annotate(num_answers=Count('answers'))
     answers = request.user.answers.all()
+    #answers = answers.distinct()
+
+#        search_results = search_results.annotate(search=SearchVector('title', 'body', 'answers__text')).filter(search=query).distinct('pk')
     
     return render(request, "qbox/my_qbox.html", {"questions": questions, "answers": answers})
 

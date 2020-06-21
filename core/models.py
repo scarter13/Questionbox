@@ -20,9 +20,7 @@ class Answer(models.Model):
     text = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     #correct = models.BooleanField(blank=True, null=True)
-    
-    class Meta:
-        ordering = ['-date']
+
 
 class StarQuestion(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='star_questions')
