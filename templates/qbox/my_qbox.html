@@ -16,7 +16,7 @@
                     <p class="mt1">{{ question.date }}</p>
                     <p>{{ question.body }}</p>
                     {% if question.num_answers %}
-                        <p><strong>Answers: {{ question.num_answers }}</strong></p>
+                        <p class="dark-blue"><strong>Answers: {{ question.num_answers }}</strong></p>
                     {% endif %}
                 </div>
             {% endfor %}
@@ -26,7 +26,8 @@
             {% for answer in answers %}
                 <div class="w-50-m ml6 mr6 mb3 bg-washed-yellow pa1 outline shadow-2">
                     <a class="black f4" href = "{% url 'show_question' question_pk=answer.question.pk %}">{{ answer.question.title }}</a>
-                    <p class="mt1">{{ answer.date }}</p>
+                    <p class="mt2 mb0">Question from {{ answer.question.user.username }}</p>
+                    <p class="mt0">{{ answer.date }}</p>
                     <p>{{ answer.question.body }}</p>
                 </div>
             {% endfor %}

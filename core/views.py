@@ -24,6 +24,7 @@ def my_qbox(request):
     questions = request.user.questions.all()
     questions = questions.annotate(num_answers=Count('answers'))
     answers = request.user.answers.all()
+    
     return render(request, "qbox/my_qbox.html", {"questions": questions, "answers": answers})
 
 def create_question(request):
@@ -81,7 +82,9 @@ def search_questions(request):
     query = request.GET.get('q')
 
     if query is not None:
-        search_results = Question.objects.filter(Q(title__search=query) | Q(body__search=query)).distinct()
+        #search_results = Question.objects.filter(Q(title__search=query) | Q(body__search=query)).distinct()
+        search_results = Question.objects.all()
+        search_results = search_results.annotate(search=SearchVector('title', 'body', 'answers__text')).filter(search=query).distinct('pk')
     else:
         search_results = None
     return render(request, "qbox/search_questions.html", {"search_results": search_results, "query": query or ""})

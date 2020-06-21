@@ -24,7 +24,7 @@
     {% if answers %}
         {% for answer in answers %}
         <div class="w-50-m ml7 mr6 mb3 bg-light-yellow pa2 outline shadow-2">
-            <p>Answer from {{ answer.author }} submitted on {{ answer.date }}:</p>
+            <p><strong>Answer from {{ answer.author }} submitted on {{ answer.date }}:</strong></p>
             <p>{{ answer.text }}</p>
         </div>
         {% endfor %}
