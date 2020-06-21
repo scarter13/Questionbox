@@ -11,7 +11,7 @@ class Question(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
 
 
 class Answer(models.Model):
@@ -22,7 +22,7 @@ class Answer(models.Model):
     #correct = models.BooleanField(blank=True, null=True)
     
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
 
 class StarQuestion(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='star_questions')
