@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from django.contrib.postgres.search import SearchQuery, SearchVector
 
 
 # Create your models here.

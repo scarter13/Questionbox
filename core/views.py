@@ -6,7 +6,11 @@ from .models import Question
 from .models import Answer
 from .forms import QuestionForm 
 from .forms import AnswerForm
-from django.db.models import Q
+from django.db.models import Q, Count
+from django.contrib.postgres.search import SearchQuery, SearchVector
+"""
+I'm confused about the SearchQuery and SearchVector.  I noticed on the Clinton's Recipe example that these imports are made at the model level.  Q, on the other hand, is on both models and views.
+"""
 
 
 # Create your views here.
@@ -18,7 +22,8 @@ def homepage(request):
 
 def my_qbox(request):
     questions = request.user.questions.all()
-    answers = request.user.answers.all
+    questions = questions.annotate(num_answers=Count('answers'))
+    answers = request.user.answers.all()
     return render(request, "qbox/my_qbox.html", {"questions": questions, "answers": answers})
 
 def create_question(request):
@@ -74,8 +79,9 @@ def create_answer(request, question_pk):
 
 def search_questions(request):
     query = request.GET.get('q')
+
     if query is not None:
-        found_questions = Question.objects.filter(Q(title__icontains=query) | Q(body__icontains=query)).distinct()
+        search_results = Question.objects.filter(Q(title__search=query) | Q(body__search=query)).distinct()
     else:
-        found_questions = None
-    return render(request, "qbox/search_questions.html", {"found_questions": found_questions, "query": query})
+        search_results = None
+    return render(request, "qbox/search_questions.html", {"search_results": search_results, "query": query or ""})

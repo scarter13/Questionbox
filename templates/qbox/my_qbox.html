@@ -15,6 +15,19 @@
                     <a class="black f4" href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a>
                     <p class="mt1">{{ question.date }}</p>
                     <p>{{ question.body }}</p>
+                    {% if question.num_answers %}
+                        <p><strong>Answers: {{ question.num_answers }}</strong></p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+    <h3 class="black mb3 mt1 ml6">Questions I have answered:</h3>
+
+            {% for answer in answers %}
+                <div class="w-50-m ml6 mr6 mb3 bg-washed-yellow pa1 outline shadow-2">
+                    <a class="black f4" href = "{% url 'show_question' question_pk=answer.question.pk %}">{{ answer.question.title }}</a>
+                    <p class="mt1">{{ answer.date }}</p>
+                    <p>{{ answer.question.body }}</p>
                 </div>
             {% endfor %}
 

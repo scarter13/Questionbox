@@ -5,25 +5,25 @@
 <h2 class="black ml6">Search Questions</h2>
 
 <form class="ml6 mr6" action="{% url 'search_questions' %}" method="GET">
-    <input type="search" name="q" placeholder="search questions" class="pa2 w-100" value="{{ request.GET.q }}">
+    <input type="search" name="q" placeholder="Search" class="pa2 w-100" value="{{ request.GET.q }}">
     <p>
         <button type="submit">Search</button>
     </p>
 </form>
 
-{% if found_questions is not None %}
+{% if search_results is not None %}
 
         <div class="w-50-m ml6 mr6 mb3 bg-washed-yellow pa1 outline shadow-2">
             <h3 class="black mt1 mb1">Search Results</h3>
         </div>
-                {% for question in found_questions %}
+                {% for question in search_results %}
                 <div class="w-50-m ml6 mr6 mb3 bg-washed-yellow pa2 outline shadow-2">
                     <a href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a>
                     <p class="mt1 mb1">Question from {{ question.user }}</p>
                     <p class="mt1 mb1">{{ question.date }}</p>
                 </div>
                 {% empty %}
-                    <p class="mr4">There are no questions that match that query</p>
+                    <p class="mr4 ml6">There are no questions that match that query</p>
                 {% endfor %}
 
 
