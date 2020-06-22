@@ -9,6 +9,7 @@ class Question(models.Model):
     title = models.CharField(max_length=255)
     body = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
+    favorite_of = models.ManyToManyField(to=User, related_name="favorite_questions")
 
     class Meta:
         ordering = ['-date']
