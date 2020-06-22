@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from users.models import User
-#from .models import Tag
 from .models import Question
 from .models import Answer
 from .forms import QuestionForm 
@@ -26,7 +25,7 @@ def my_qbox(request):
     questions = request.user.questions.all()
     questions = questions.annotate(num_answers=Count('answers'))
     answers = request.user.answers.all()
-    #answers = answers.distinct()
+    answers = answers.distinct('question')
 
 #        search_results = search_results.annotate(search=SearchVector('title', 'body', 'answers__text')).filter(search=query).distinct('pk')
     
@@ -40,7 +39,6 @@ def create_question(request):
             question = form.save(commit=False)
             question.user = request.user
             question.save()
-            #question.set_tag_names(form.cleaned_data['tag_names'])
             return redirect(to='my_qbox')
     else:
         form = QuestionForm()
@@ -67,7 +65,23 @@ def toggle_favorite_question(request, question_pk):
         request.user.favorite_questions.add(question)
         return JsonResponse({"isFavorite": True})
 
+"""
+Considering how to best build a favorite questions view, method, and work into template
+First, to avoid confusion, I think you should change the names of all instances of 'is_user_favorite' to 'is_user_favorite_question."  Or, you could just continue forward with the new field as 'is_user_favorite_answer.'  This would allow for you to differentiate from 'is_user_correct_answer' later on.
 
+@login_required
+@csrf_exempt
+def toggle_favorite_answer(request, answer_pk):
+    answer = get_object_or_404(Answer, pk=answer_pk)
+
+    if request.user.is_favorite_answer(answer_pk):
+        request.user.favorite_answers.remove(answer)
+        return JsonResponse({"isFavorite": False})
+    else:
+        request.user.favorite_answer.add(answer)
+        return JsonResponse({"isFavorite": True})
+
+"""
 def edit_question(request, question_pk):
     question = get_object_or_404(request.user.questions, pk=question_pk)
 
@@ -91,7 +105,6 @@ def create_answer(request, question_pk):
             answer.author = request.user
             answer.question = question
             answer.save()
-            #question.set_tag_names(form.cleaned_data['tag_names'])
             return redirect(to='show_question', question_pk=question.pk)
     else:
         form = AnswerForm()

@@ -8,3 +8,6 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     def is_favorite_question(self, question_pk):
         return self.favorite_questions.filter(pk=question_pk).count() == 1
+
+    #def is_favorite_answer(self, answer_pk):
+        #return self.favorite_answers.filter(pk=answer_pk).count() == 1
