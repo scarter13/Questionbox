@@ -25,6 +25,7 @@ urlpatterns = [
     path('qbox/question/<int:question_pk>/', core_views.show_question, name = 'show_question'),
     path('qbox/edit/question/<int:question_pk>/', core_views.edit_question, name='edit_question'),
     path('qbox/new/answer/<int:question_pk>/', core_views.create_answer, name = 'create_answer'),
+    path('qbox/<int:question_pk>/favorite/', core_views.toggle_favorite_question, name = 'toggle_favorite_question'),
     path('qbox/search/', core_views.search_questions, name = 'search_questions'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),

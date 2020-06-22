@@ -12,6 +12,7 @@
 
             {% for question in questions %}
                 <div class="w-50-m ml6 mr6 mb3 bg-washed-yellow pa1 outline shadow-2">
+                    
                     <a class="black f4" href = "{% url 'show_question' question_pk=question.pk %}">{{ question.title }}</a>
                     <p class="mt1">{{ question.date }}</p>
                     <p>{{ question.body }}</p>

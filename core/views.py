@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from users.models import User
 #from .models import Tag
 from .models import Question
@@ -8,6 +9,7 @@ from .forms import QuestionForm
 from .forms import AnswerForm
 from django.db.models import Q, Count
 from django.contrib.postgres.search import SearchQuery, SearchVector
+from django.http import JsonResponse
 """
 I'm confused about the SearchQuery and SearchVector.  I noticed on the Clinton's Recipe example that these imports are made at the model level.  Q, on the other hand, is on both models and views.
 """
@@ -30,6 +32,7 @@ def my_qbox(request):
     
     return render(request, "qbox/my_qbox.html", {"questions": questions, "answers": answers})
 
+
 def create_question(request):
     if request.method == "POST":
         form = QuestionForm(data=request.POST)
@@ -48,8 +51,22 @@ def show_question(request, question_pk):
     question = get_object_or_404(Question, pk=question_pk)
     request_user = request.user
     answers = question.answers.all()
+    is_user_favorite = request.user.is_favorite_question(question_pk)
 
-    return render(request, "qbox/show_question.html", {"question": question, "request_user": request_user, "answers": answers})  
+    return render(request, "qbox/show_question.html", {"question": question, "request_user": request_user, "answers": answers, "is_user_favorite": is_user_favorite})  
+
+@login_required
+@csrf_exempt
+def toggle_favorite_question(request, question_pk):
+    question = get_object_or_404(Question, pk=question_pk)
+
+    if request.user.is_favorite_question(question_pk):
+        request.user.favorite_questions.remove(question)
+        return JsonResponse({"isFavorite": False})
+    else:
+        request.user.favorite_questions.add(question)
+        return JsonResponse({"isFavorite": True})
+
 
 def edit_question(request, question_pk):
     question = get_object_or_404(request.user.questions, pk=question_pk)

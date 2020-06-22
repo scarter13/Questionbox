@@ -6,4 +6,5 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    pass
+    def is_favorite_question(self, question_pk):
+        return self.favorite_questions.filter(pk=question_pk).count() == 1
