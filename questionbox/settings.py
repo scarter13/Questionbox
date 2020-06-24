@@ -43,19 +43,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.postgres',
+    'django.contrib.postgres',  
     
 
     # Third-party
     'debug_toolbar',
     'django_extensions',
     'registration',
+    'rest_framework', 
    
     
 
     # Project-specific
     'users',
     'core',
+    'api',
 ]
 
 MIDDLEWARE = [

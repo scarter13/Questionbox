@@ -17,6 +17,12 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 from core import views as core_views
+from api import views as api_views
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+router.register('users', api_views.UserViewSet)
 
 urlpatterns = [
     path('', core_views.search_questions, name = 'homepage'),
@@ -29,6 +35,8 @@ urlpatterns = [
     path('qbox/search/', core_views.search_questions, name = 'search_questions'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/', include(router.urls)),
 ]
 
 if settings.DEBUG:
