@@ -21,6 +21,7 @@ def homepage(request):
 
     return render(request, "qbox/home.html")
 
+@login_required
 def my_qbox(request):
     questions = request.user.questions.all()
     questions = questions.annotate(num_answers=Count('answers'))
@@ -32,6 +33,7 @@ def my_qbox(request):
     return render(request, "qbox/my_qbox.html", {"questions": questions, "answers": answers})
 
 
+@login_required
 def create_question(request):
     if request.method == "POST":
         form = QuestionForm(data=request.POST)
@@ -44,6 +46,7 @@ def create_question(request):
         form = QuestionForm()
 
     return render(request, "qbox/create_question.html", {"form": form})
+
 
 def show_question(request, question_pk):
     question = get_object_or_404(Question, pk=question_pk)
@@ -82,6 +85,8 @@ def toggle_favorite_answer(request, answer_pk):
         return JsonResponse({"isFavorite": True})
 
 """
+
+@login_required
 def edit_question(request, question_pk):
     question = get_object_or_404(request.user.questions, pk=question_pk)
 
@@ -96,6 +101,7 @@ def edit_question(request, question_pk):
 
     return render (request, "qbox/edit_question.html", {"form": form, "question": question})
 
+@login_required
 def create_answer(request, question_pk):
     question = get_object_or_404(Question, pk=question_pk)
     if request.method == "POST":
@@ -117,7 +123,7 @@ def search_questions(request):
     if query is not None:
         #search_results = Question.objects.filter(Q(title__search=query) | Q(body__search=query)).distinct()
         search_results = Question.objects.all()
-        search_results = search_results.annotate(search=SearchVector('title', 'body', 'answers__text')).filter(search=query).distinct('pk')
+        search_results = search_results.annotate(search=SearchVector('title', 'body', 'answers__text')).filter(search=query).distinct('date')
     else:
         search_results = None
     return render(request, "qbox/search_questions.html", {"search_results": search_results, "query": query or ""})
