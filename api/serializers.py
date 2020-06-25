@@ -5,9 +5,20 @@ from core.models import Question, Answer
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'url', 'username', 'email', 'is_staff']
+        fields = ['id', 'url', 'username', 'email',]
+
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields =[
+            'author',
+            'question',
+            'text',
+            'date',
+        ]
 
 class QuestionSerializer(serializers.HyperlinkedModelSerializer):
+    answers = AnswerSerializer(many=True, required=False)
     class Meta:
         model = Question
         fields =[
@@ -16,18 +27,6 @@ class QuestionSerializer(serializers.HyperlinkedModelSerializer):
             'title',
             'body',
             'date',
-            'favorite_of',
-        ]
-
-class AnswerSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Answer
-        fields =[
-            'url',
-            'author',
-            'question',
-            'text',
-            'date',
-            'favorite_of',
+            'answers',
         ]
 
