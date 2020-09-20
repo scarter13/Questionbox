@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',  
     
-
     # Third-party
     'debug_toolbar',
     'django_extensions',
@@ -53,12 +52,11 @@ INSTALLED_APPS = [
     'rest_framework', 
     'tastypie',
    
-    
-
     # Project-specific
     'users',
     'core',
     'api',
+    'testypie',
 ]
 
 MIDDLEWARE = [
