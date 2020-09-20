@@ -1,4 +1,4 @@
-# QuestionBox
+QuestionBox
 
 You want to make an application where people can crowdsource their questions and get answers. You are going to build a web application that has these goals:
 
