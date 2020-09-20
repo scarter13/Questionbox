@@ -19,7 +19,7 @@ from django.urls import include, path
 from core import views as core_views
 from api import views as api_views
 from rest_framework import routers
-from testypie.testyapi import QuestionResource
+from testypie.testyapi import QuestionResource, AnswerResource, UserResource
 
 
 router = routers.DefaultRouter()
@@ -28,6 +28,8 @@ router.register('questions', api_views.QuestionViewSet)
 router.register('answers', api_views.AnswerViewSet)
 
 question_resource = QuestionResource()
+answer_resource = AnswerResource()
+user_resource = UserResource()
 
 urlpatterns = [
     path('', core_views.search_questions, name = 'homepage'),
@@ -43,6 +45,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('api/tastypie/', include(question_resource.urls)),
+    path('api/tastypie/', include(answer_resource.urls)),
+    path('api/tastypie/', include(user_resource.urls)),
 ]
 
 if settings.DEBUG:
